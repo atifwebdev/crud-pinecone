@@ -23,16 +23,18 @@ function App() {
       console.log("effect");
     }
   }, [alert]);
-  
-  // useEffect(() => {
-  //   getAllStories();
-  // }, []);
-  
-  // const getAllStories = async () => {
-  //   const resp = await axios.get(`${baseUrl}/api/v1/stories`)
-  //   console.log(resp.data);
-  // }
-  
+
+  useEffect(() => {
+    getAllStories();
+  }, []);
+
+  const getAllStories = async () => {
+    const resp = await axios.get(`${baseUrl}/api/v1/stories`)
+    console.log(resp.data);
+
+    setData(resp.data);
+  }
+
   const postStory = async (event) => {
     event.preventDefault();
 
@@ -84,12 +86,20 @@ function App() {
         <button type="submit">Post</button>
       </form>
 
-      {alert && <div className="alert">{alert}</div>}
-
       <br />
       <hr />
       <br />
 
+
+      {(data.length) ? (
+
+        data.map((eachPostrData, index) =>
+          <div key={index}>
+            <h2>{eachPostrData?.metadata?.title}</h2>
+            <p>{eachPostrData?.metadata?.body}</p>
+          </div>)
+
+      ) : null}
 
 
     </div>
