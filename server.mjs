@@ -110,6 +110,32 @@ app.post("/api/v1/story", async (req, res) => {
 });
 
 
+// Delete Request
+app.delete("/api/v1/story/:id", async (req, res) => {
+  try {
+    const index = pinecone.Index(process.env.PINECONE_INDEX_NAME);
+    const deleteResponse = await index.delete1({
+      ids: [req.params.id],
+      namespace: process.env.PINECONE_NAME_SPACE
+    });
+
+    console.log("deleteResponse: ", deleteResponse);
+
+    res.send({
+      message: "story deleted successfully"
+    });
+
+  } catch (e) {
+    console.log("error: ", e)
+    res.status(500).send({
+      message: "failed to create story, please try later"
+    });
+  }
+
+});
+
+
+
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
