@@ -40,3 +40,28 @@
 .postData {
   margin: 8rem 0;
 }
+
+.updateForm form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.updateForm form input#titleInput {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.updateForm form button {
+  margin: 0.5rem auto;
+  padding: 0.5rem 0;
+  width: 20%;
+}
+
+.updateForm form textarea#bodyInput {
+  padding: 1rem;
+  height: 10rem;
+}
+.searchBox form input {
+  padding: 1rem 2rem;
+}
