@@ -24,9 +24,12 @@ const app = express();
 app.use(express.json());
 app.use(cors([]));
 
-app.get('/', (req, res) => {
-  res.send('Hello Weorld!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello Weorld!')
+// })
+
+app.get(express.static(path.join(__dirname, "/web/build")));
+app.use("/", express.static(path.join(__dirname, "/web/build")));
 
 // Read Or Show Request:
 app.get("/api/v1/stories", async (req, res) => {
@@ -213,7 +216,7 @@ app.delete("/api/v1/story/:id", async (req, res) => {
 
 
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
